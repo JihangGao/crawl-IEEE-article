@@ -40,7 +40,7 @@ for i in range(len(data)):
     browser.get(url)
     time.sleep(5)
     for i in range(1,26):
-        Paper_id[i] = browser.find_element(By.XPATH, '//*[@id="publicationIssueMainContent global-margin-px"]/div[2]/div/div[2]/div/xpl-issue-results-list/div[2]/div[i]/div/xpl-issue-results-items/div[1]/div[1]/div[2]/h2/a')
+        Paper_id[i] = browser.find_element(By.XPATH, '//*[@id="publicationIssueMainContent global-margin-px"]/div[2]/div/div[2]/div/xpl-issue-results-list/div[2]/div[' + i + ']/div/xpl-issue-results-items/div[1]/div[1]/div[2]/h2/a')
         print(Paper_id)
     
     
