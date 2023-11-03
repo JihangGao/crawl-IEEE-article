@@ -4,8 +4,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import time
 
-#chrome_options = Options()
-chrome_options = webdriver.ChromeOptions()
+chrome_options = Options()
+#chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--headless')
 chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-dev-shm-usage')
@@ -27,7 +27,7 @@ def getHtml(url):
 #with open('data.txt','r') as f:
 #    data=f.read().splitlines()
 
-browser = webdriver.Chrome('/usr/bin/chromedriver')
+browser = webdriver.Chrome('/usr/bin/chromedriver', options=chrome_options)
 
 urlBase='https://ieeexplore.ieee.org/search/searchresult.jsp?action=search&newsearch=true&searchField=Search_All&matchBoolean=true&queryText="DOI":'
 
