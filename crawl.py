@@ -24,8 +24,8 @@ def getHtml(url):
         import traceback
         traceback.print_exc()
 
-#with open('data.txt','r') as f:
-#    data=f.read().splitlines()
+with open('data.txt','r') as f:
+    data=f.read().splitlines()
 
 browser = webdriver.Chrome('/usr/bin/chromedriver', options=chrome_options)
 
@@ -55,4 +55,4 @@ for i in range(len(data)):
 
     with open(fname,'ab+') as f:
         print('start download file ',fname)
-  #      f.write(response.content)
+        f.write(response.content)
