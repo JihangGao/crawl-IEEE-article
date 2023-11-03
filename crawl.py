@@ -2,6 +2,9 @@ import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+
+
 import time
 
 chrome_options = Options()
@@ -9,7 +12,7 @@ chrome_options = Options()
 chrome_options.add_argument('--headless')
 chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-dev-shm-usage')
-
+service = Service(executable_path=r'/usr/bin/chromedriver')
 
 def getHtml(url):
     # Mozilla/5.0 (Windows NT 10.0; WOW64; rv:57.0) Gecko/20100101 Firefox/57.0
@@ -27,7 +30,7 @@ def getHtml(url):
 with open('data.txt','r') as f:
     data=f.read().splitlines()
 
-browser = webdriver.Chrome('/usr/bin/chromedriver', options=chrome_options)
+browser = webdriver.Chrome(service=service, options=chrome_options)
 
 urlBase='https://ieeexplore.ieee.org/search/searchresult.jsp?action=search&newsearch=true&searchField=Search_All&matchBoolean=true&queryText="DOI":'
 
