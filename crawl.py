@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
-
+from selenium.webdriver.common.by import By
 
 import time
 
@@ -32,30 +32,21 @@ with open('data.txt','r') as f:
 
 browser = webdriver.Chrome(service=service, options=chrome_options)
 
-urlBase='https://ieeexplore.ieee.org/search/searchresult.jsp?action=search&newsearch=true&searchField=Search_All&matchBoolean=true&queryText="DOI":'
+urlBase='https://ieeexplore.ieee.org/xpl/tocresult.jsp?isnumber=4359912'
 
 for i in range(len(data)):
     doi=data[i]
-    url=urlBase+doi
+    url=urlBase
     browser.get(url)
     time.sleep(5)
-    link_list=browser.find_element_by_xpath("//*[@data-artnum]")
-    if link_list=='':
-        print('Failed to download the {}-th paper'.format(i))
-        continue
-    arcNum=link_list.get_attribute('data-artnum')
-    pdfUrl='http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber='+arcNum
-    soup = BeautifulSoup(getHtml(pdfUrl), 'html.parser')
-    result = soup.body.find_all('iframe')
-    print(arcNum,result)
-    if result==[]:
-        print('Failed to download the {}-th paper with article number {}'.format(i,arcNum))
-        continue
-    downloadUrl = result[-1].attrs['src'].split('?')[0]
-    response = requests.get(downloadUrl, timeout=80, headers=headers)
-    fname = str(ind)+'_'+downloadUrl[-12:]
-    ind+=1
+    for i in range(1,26):
+        Paper_id[i] = browser.find_element(By.XPATH, '//*[@id="publicationIssueMainContent global-margin-px"]/div[2]/div/div[2]/div/xpl-issue-results-list/div[2]/div[i]/div/xpl-issue-results-items/div[1]/div[1]/div[2]/h2/a')
+        print(Paper_id)
+    
+    
 
+
+    
     with open(fname,'ab+') as f:
         print('start download file ',fname)
         f.write(response.content)
