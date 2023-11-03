@@ -27,7 +27,7 @@ def getHtml(url):
 #with open('data.txt','r') as f:
 #    data=f.read().splitlines()
 
-browser = webdriver.Chrome('/usr/bin/chromedriver', options=chrome_options)
+browser = webdriver.Chrome('/usr/bin/chromedriver')
 
 urlBase='https://ieeexplore.ieee.org/search/searchresult.jsp?action=search&newsearch=true&searchField=Search_All&matchBoolean=true&queryText="DOI":'
 
