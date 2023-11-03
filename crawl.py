@@ -3,9 +3,14 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 import time
 
+chrome_options = Options()
+chrome_options.add_argument('--headless')
+chrome_options.add_argument('--no-sandbox')
+chrome_options.add_argument('--disable-dev-shm-usage')
+
+
 def getHtml(url):
     # Mozilla/5.0 (Windows NT 10.0; WOW64; rv:57.0) Gecko/20100101 Firefox/57.0
-    headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:57.0) Gecko/20100101 Firefox/57.0'}
     try:
         response = requests.get(url,timeout=40,headers=headers)
         response.raise_for_status()
@@ -17,11 +22,10 @@ def getHtml(url):
         import traceback
         traceback.print_exc()
 
-with open('data.txt','r') as f:
-    data=f.read().splitlines()
-headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:57.0) Gecko/20100101 Firefox/57.0'}
+#with open('data.txt','r') as f:
+#    data=f.read().splitlines()
 
-browser = webdriver.Chrome('C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe')
+browser = webdriver.Chrome('/usr/bin/chromedriver', options=chrome_options)
 
 urlBase='https://ieeexplore.ieee.org/search/searchresult.jsp?action=search&newsearch=true&searchField=Search_All&matchBoolean=true&queryText="DOI":'
 
@@ -49,4 +53,4 @@ for i in range(len(data)):
 
     with open(fname,'ab+') as f:
         print('start download file ',fname)
-        f.write(response.content)
+  #      f.write(response.content)
